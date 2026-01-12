@@ -1,0 +1,80 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use {{ baseStateClass }};
+use Illuminate\Support\Str;
+
+/**
+ * Auto-generated enum for {{ baseStateClass }}.
+ *
+ * ⚠️ IMPORTANT: After creating new state classes, run:
+ *    {{ syncCommand }}
+ *
+ * This ensures all state classes are reflected in this enum.
+ * Your custom canTransitionTo() logic will be preserved during sync.
+ *
+ * 👉 TODO: Define your transition logic in canTransitionTo()
+ */
+enum {{ enumName }}: string
+{
+{{ cases }}
+
+    /**
+     * Get the State class for this enum case.
+     *
+     * Convention: Enum case name = State class name.
+     */
+    public function stateClass(): string
+    {
+        $namespace = Str::beforeLast(\{{ baseStateClass }}::class, '\\');
+
+        return $namespace . '\\' . $this->name;
+    }
+
+{{ canTransitionTo }}
+
+    /**
+     * Check if transition to target state is allowed.
+     */
+    public function canTransitionToState(self $target): bool
+    {
+        return in_array($target, $this->canTransitionTo(), true);
+    }
+
+    /**
+     * Get all state classes for registration.
+     */
+    public static function stateClasses(): array
+    {
+        return array_map(fn (self $s) => $s->stateClass(), self::cases());
+    }
+
+    /**
+     * Get all transitions for StateConfig.
+     *
+     * @return array<array{from: string, to: string}>
+     */
+    public static function transitions(): array
+    {
+        return collect(self::cases())
+            ->flatMap(fn (self $from) =>
+                collect($from->canTransitionTo())
+                    ->map(fn (self $to) => [
+                        'from' => $from->stateClass(),
+                        'to' => $to->stateClass(),
+                    ])
+            )
+            ->all();
+    }
+
+    /**
+     * Find enum case from state name.
+     */
+    public static function fromStateName(string $name): ?self
+    {
+        return self::tryFrom($name);
+    }
+}

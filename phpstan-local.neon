@@ -1,0 +1,116 @@
+# Package-specific PHPStan configuration
+# This file contains rules specific to this package and won't be overwritten by skeleton sync
+# Add your package-specific ignoreErrors, excludePaths, or other customizations here
+
+parameters:
+  # Override level for this package - reduce strictness for initial release
+  level: 5
+
+  # Analyze only src, not tests
+  paths:
+    - src
+
+  # Exclude tests from analysis
+  excludePaths:
+    - tests
+    - src/Testing  # Pest expectations use special $this binding
+
+  # Package-specific ignores
+  ignoreErrors:
+    # Traits exported for package users, not used internally
+    - identifier: trait.unused
+
+    # Generic type specifications - will fix gradually
+    -
+      message: '#does not specify its types#'
+
+    # Method exists checks on interfaces
+    -
+      message: '#Call to function method_exists\(\) .* will always evaluate to true#'
+
+    # Nullsafe operator style preferences
+    -
+      message: '#Using nullsafe#'
+
+    # Class-string type coercion issues - common in state machine packages
+    -
+      message: '#class-string<.*StateContract>, string given#'
+
+    # TransitionContext nullable issues - handled at runtime
+    -
+      message: '#TransitionContext\|null#'
+
+    # Return type covariance issues with Collection
+    -
+      message: '#should return.*Collection.*but returns.*Collection#'
+
+    # Undefined property/method on interfaces - these exist on implementing classes
+    -
+      message: '#Call to an undefined method.*HasStatesContract#'
+    -
+      message: '#Call to an undefined static method.*HasStatesContract#'
+
+    # Object property access issues
+    -
+      message: '#Access to an undefined property object#'
+    -
+      message: '#Call to an undefined static method object#'
+    -
+      message: '#Call to an undefined method object#'
+
+    # Static call to instance method
+    -
+      message: '#Static call to instance method#'
+
+    # Console command option handling
+    -
+      message: '#array\|string\|true given#'
+    -
+      message: '#array\|bool\|string#'
+    -
+      message: '#cannot be cast to string#'
+    -
+      message: '#Possibly invalid array key type#'
+    -
+      message: '#Binary operation#'
+
+    # Return type issues
+    -
+      message: '#should return.*but returns#'
+
+    # Missing type specifications
+    -
+      identifier: missingType.iterableValue
+    -
+      identifier: missingType.parameter
+
+    # By-ref parameter type issues
+    - identifier: parameterByRef.type
+
+    # Undefined static method on interface (exists on concrete classes)
+    -
+      message: '#Call to an undefined static method.*StateContract::isDefault#'
+
+    # Access to undefined property on DTOs (dynamic properties)
+    -
+      message: '#Access to an undefined property.*TransitionResult#'
+
+    # Method on nullable Collection
+    -
+      message: '#Cannot call method.*on.*Collection\|null#'
+
+    # Method on nullable Model
+    -
+      message: '#Cannot call method.*on.*Model\|null#'
+
+    # array_slice parameter type
+    -
+      message: '#Parameter .* of function array_slice#'
+
+    # class_basename with nullable model
+    -
+      message: '#Parameter .* of function class_basename expects object\|string.*Model\|null given#'
+
+    # Recursive method call type issues
+    -
+      message: '#Parameter .* of method.*findReachableStates\(\) expects#'

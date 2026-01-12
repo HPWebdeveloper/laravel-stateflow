@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Hpwebdeveloper\LaravelStateflow\Contracts\TransitionActionContract;
+use Hpwebdeveloper\LaravelStateflow\DTOs\TransitionContext;
+use Hpwebdeveloper\LaravelStateflow\DTOs\TransitionResult;
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} implements TransitionActionContract
+{
+    /**
+     * Execute the transition.
+     */
+    public function handle(Model $model, TransitionContext $context): TransitionResult
+    {
+        // Add your custom transition logic here
+        // Example: send notifications, update related models, etc.
+
+        // Update the state
+        $model->{$context->field} = $context->toState;
+        $model->save();
+
+        return TransitionResult::success(
+            model: $model,
+            field: $context->field,
+            fromState: $context->fromState,
+            toState: $context->toState,
+        );
+    }
+}

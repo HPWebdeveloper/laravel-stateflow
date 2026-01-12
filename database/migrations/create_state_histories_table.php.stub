@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create(config('laravel-stateflow.history.table', 'state_histories'), function (Blueprint $table) {
+            $table->id();
+
+            // Polymorphic relation to the model
+            $table->morphs('model');
+
+            // State field name (for models with multiple state fields)
+            $table->string('field', 50)->default('state');
+
+            // Transition details
+            $table->string('from_state', 100);
+            $table->string('to_state', 100);
+
+            // Who performed the transition (nullable for system/automated transitions)
+            $table->unsignedBigInteger('performer_id')->nullable();
+            $table->string('performer_type')->nullable();
+
+            // Optional reason/comment for the transition
+            $table->text('reason')->nullable();
+
+            // Additional metadata (JSON)
+            $table->json('metadata')->nullable();
+
+            // Transition class used (if custom)
+            $table->string('transition_class')->nullable();
+
+            // IP address and user agent for security audits
+            $table->string('ip_address', 45)->nullable(); // IPv6 compatible
+            $table->text('user_agent')->nullable();
+
+            $table->timestamps();
+
+            // Indexes for common queries
+            $table->index(['model_type', 'model_id', 'field'], 'state_histories_model_field_index');
+            $table->index(['model_type', 'model_id', 'created_at'], 'state_histories_model_time_index');
+            $table->index(['performer_id', 'performer_type'], 'state_histories_performer_index');
+            $table->index('created_at');
+            $table->index(['from_state', 'to_state'], 'state_histories_states_index');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(config('laravel-stateflow.history.table', 'state_histories'));
+    }
+};

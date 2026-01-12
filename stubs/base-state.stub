@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Hpwebdeveloper\LaravelStateflow\State;
+
+abstract class {{ class }} extends State
+{
+    /**
+     * Define any shared behavior for all states in this group.
+     */
+}
