@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Hpwebdeveloper\LaravelStateflow\Attributes\StateMetadata;
+{{ defaultImport }}
+{{ defaultAttribute }}
+#[StateMetadata(color: '{{ color }}', icon: '{{ icon }}')]
+class {{ class }} extends {{ baseState }}
+{
+    /**
+     * The state name (stored in database).
+     */
+    public static function name(): string
+    {
+        return '{{ stateName }}';
+    }
+
+    /**
+     * The human-readable title.
+     */
+    public static function title(): string
+    {
+        return '{{ stateTitle }}';
+    }
+}

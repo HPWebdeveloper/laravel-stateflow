@@ -1,0 +1,80 @@
+{
+  "name": "hpwebdeveloper/laravel-stateflow",
+  "description": "Laravel Model States with Context",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "laravel",
+    "package",
+    "states",
+    "context"
+  ],
+  "authors": [
+    {
+      "name": "Hamed Panjeh",
+      "email": "panjeh@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.3",
+    "illuminate/support": "^12.0"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.48",
+    "larastan/larastan": "^3.8.1",
+    "laravel/pint": "^1.27",
+    "orchestra/testbench": "^10.9",
+    "orchestra/workbench": "^10.0.8",
+    "pestphp/pest": "^4.3",
+    "pestphp/pest-plugin-laravel": "^4.0",
+    "phpstan/phpstan": "^2.1.33",
+    "phpunit/phpunit": "^12.5.4"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Hpwebdeveloper\\LaravelStateflow\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Hpwebdeveloper\\LaravelStateflow\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "pestphp/pest-plugin": false
+    }
+  },
+  "extra": {
+    "laravel": {
+      "aliases": {
+        "StateFlow": "Hpwebdeveloper\\LaravelStateflow\\Facades\\StateFlow"
+      },
+      "providers": [
+        "Hpwebdeveloper\\LaravelStateflow\\LaravelStateflowServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@hooks:enable"
+    ],
+    "post-update-cmd": [
+      "@hooks:enable"
+    ],
+    "composer:normalize": "composer normalize",
+    "composer:normalize:check": "composer normalize --dry-run --no-interaction",
+    "format": "pint",
+    "format:check": "pint --test",
+    "format:dirty": "pint --dirty",
+    "hooks:enable": [
+      "[ -d .git ] && git config core.hooksPath .githooks || true",
+      "[ -f .githooks/pre-commit ] && chmod +x .githooks/pre-commit || true"
+    ],
+    "stan": "phpstan analyse --no-progress --memory-limit=512M src",
+    "test": "pest"
+  }
+}
