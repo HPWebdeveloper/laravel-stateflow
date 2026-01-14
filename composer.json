@@ -25,7 +25,7 @@
     "laravel/pint": "^1.27",
     "orchestra/testbench": "^10.0",
     "orchestra/workbench": "^10.0.7",
-    "pestphp/pest": "^4.0",
+    "pestphp/pest": "^4.3",
     "pestphp/pest-plugin-laravel": "^4.0",
     "phpstan/phpstan": "^2.1.33",
     "phpunit/phpunit": "^12.5.4"
