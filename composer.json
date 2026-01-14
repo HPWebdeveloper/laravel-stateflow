@@ -23,7 +23,7 @@
     "ergebnis/composer-normalize": "^2.48",
     "larastan/larastan": "^3.8.1",
     "laravel/pint": "^1.27",
-    "orchestra/testbench": "^10.0",
+    "orchestra/testbench": "^10.9",
     "orchestra/workbench": "^10.0.7",
     "pestphp/pest": "^4.0",
     "pestphp/pest-plugin-laravel": "^4.0",
