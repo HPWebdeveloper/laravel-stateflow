@@ -6,8 +6,7 @@ A modern, enterprise-ready state machine implementation for Laravel Eloquent mod
 
 Author: Hamed Panjeh
 
-Laravel StateFlow is inspired by similar concepts found
-in [Spatie Laravel Model States](https://github.com/spatie/laravel-model-states), however, it is a fully independent, ground-up implementation with its own architecture and design decisions.
+Laravel StateFlow is inspired by similar concepts found in [Spatie Laravel Model States](https://github.com/spatie/laravel-model-states), however, it is a fully independent, ground-up implementation with its own architecture and design decisions.
 It combines the state pattern with state machines to deliver **enterprise-ready features**: automatic state class discovery, automatic transition discovery, permissions, UI metadata, history tracking, and API resources. **Laravel StateFlow maintains a single, unified topology of all possible states and transitions in your application's backing enum.** This centralized architecture ensures that state definitions remain synchronized across your entire application, eliminating inconsistencies between backend logic and frontend representations. For large, complex systems, managing state changes and transitions is no longer cumbersome or bug-prone as your system grows—a single enum serves as the definitive source of truth.
 
 > 📦 **Demo Application:** See Laravel StateFlow in action with a complete order management demo at [laravel-stateflow-demo](https://github.com/HPWebdeveloper/laravel-stateflow-demo).

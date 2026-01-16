@@ -178,7 +178,7 @@ class ExecuteTransition implements TransitionActionContract
             }
         }
 
-        // Check state permission (Phase 5 will enhance this)
+        // Check state permission
         if (StateFlow::hasFeature('permissions') && $data->performer) {
             $toStateClass = $data->toState;
 
@@ -277,7 +277,7 @@ class ExecuteTransition implements TransitionActionContract
     {
         $this->context->recordHook('onSuccess');
 
-        // Record history if enabled (Phase 7)
+        // Record history if enabled
         if ($this->shouldRecordHistory()) {
             $this->recordHistory($data, $result);
             $this->context->recordHook('historyRecorded');
@@ -425,7 +425,7 @@ class ExecuteTransition implements TransitionActionContract
     }
 
     // -------------------------------------------------------------------------
-    // History Recording (Phase 7)
+    // History Recording
     // -------------------------------------------------------------------------
 
     /**
