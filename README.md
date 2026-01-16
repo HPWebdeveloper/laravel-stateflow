@@ -17,7 +17,6 @@ It combines the state pattern with state machines to deliver **enterprise-ready 
 - [Why Laravel StateFlow?](#why-laravel-stateflow)
   - [The Problem with Manual Transitions](#the-problem-with-manual-transitions)
   - [StateFlow's Solution](#laravel-stateflows-solution-centralized-state-topology)
-  - [Concrete Examples](#concrete-examples)
   - [Key Innovations](#key-innovations)
 - [Installation](#installation)
 - [Preparation in 4 Simple Steps](#preparation-in-4-simple-steps)
@@ -181,60 +180,6 @@ class Booking extends Model implements HasStatesContract
 ```
 
 > 💡 **See it live:** [BookingStateStatus.php](https://github.com/HPWebdeveloper/laravel-stateflow-demo/blob/main/app/Enums/BookingStateStatus.php) ・ [Booking.php](https://github.com/HPWebdeveloper/laravel-stateflow-demo/blob/main/app/Models/Booking.php) ・ [Docs](docs/examples/enum-usage-states-transitions.md)
-
-### Concrete Examples
-
-**1. Automatic Next State Discovery**
-
-```php
-// Get available transitions from current state
-$order->getNextStates();           // [Processing::class, Cancelled::class]
-$order->hasNextStates();           // true
-```
-
-**2. Rich State Metadata**
-
-```php
-class Pending extends OrderState
-{
-    public const NAME = 'pending';
-
-    public static function color(): string { return 'yellow'; }
-    public static function title(): string { return 'Pending'; }
-    public static function icon(): string { return 'clock'; }
-}
-```
-
-**3. Declarative Transitions with Attributes**
-
-```php
-#[AllowTransition(to: Processing::class)]
-#[AllowTransition(to: Cancelled::class)]
-class Pending extends OrderState {}
-```
-
-**4. Multiple Permission Approaches**
-
-```php
-// Using attributes
-#[StatePermission(roles: ['admin', 'warehouse'])]
-
-// Using constants
-public const PERMITTED_ROLES = ['admin', 'warehouse'];
-
-// Using Laravel Policies
-// Automatically checks OrderPolicy::transitionToProcessing()
-```
-
-**5. Clean Eloquent Integration**
-
-```php
-// StateFlow provides automatic casting
-$order->state;                    // State instance
-$order->state->name();            // 'pending'
-$order->state->color();           // 'yellow'
-$order->getNextStates();          // Auto-discovered next states
-```
 
 ### Key Innovations
 
