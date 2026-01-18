@@ -67,7 +67,7 @@ if ($order->status === 'pending') {
     $order->update(['status' => 'processing']);
 }
 
-// Now answer these questions:
+😐 Now answer these questions:
 // 1. What states can this order transition to RIGHT NOW?
 // 2. What buttons should I show the user in the UI?
 // 3. Which users are ALLOWED to perform each transition?
@@ -82,7 +82,7 @@ if ($order->status === 'pending') {
 // 12. How do I rollback or revert to a previous state if needed?
 ```
 
-### ❌ This creates several pain points:
+### 🤦‍♂️ This creates several pain points:
 
 **Scattered Workflow Definition**
 
@@ -181,7 +181,7 @@ class Booking extends Model implements HasStatesContract
 
 > 💡 **See it live:** [BookingStateStatus.php](https://github.com/HPWebdeveloper/laravel-stateflow-demo/blob/main/app/Enums/BookingStateStatus.php) ・ [Booking.php](https://github.com/HPWebdeveloper/laravel-stateflow-demo/blob/main/app/Models/Booking.php) ・ [Docs](docs/examples/enum-usage-states-transitions.md)
 
-### Key Innovations
+### ⭐️⭐️⭐️⭐️⭐️ Key Innovations 
 
 Laravel StateFlow provides enterprise features like automatic state discovery, rich UI metadata, built-in permissions, complete audit trails, and seamless Eloquent integration:
 
