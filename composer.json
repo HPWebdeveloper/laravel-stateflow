@@ -27,7 +27,7 @@
     "orchestra/workbench": "^10.0.8",
     "pestphp/pest": "^4.3",
     "pestphp/pest-plugin-laravel": "^4.0",
-    "phpstan/phpstan": "^2.1.33",
+    "phpstan/phpstan": "^2.1.38",
     "phpunit/phpunit": "^12.5.4"
   },
   "minimum-stability": "stable",
