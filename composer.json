@@ -22,7 +22,7 @@
   "require-dev": {
     "ergebnis/composer-normalize": "^2.48",
     "larastan/larastan": "^3.8.1",
-    "laravel/pint": "^1.27",
+    "laravel/pint": "^1.29",
     "orchestra/testbench": "^10.9",
     "orchestra/workbench": "^10.0.8",
     "pestphp/pest": "^4.3",
